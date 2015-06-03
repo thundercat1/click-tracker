@@ -2,17 +2,23 @@ console.log('I am simply in the background');
 
 window.activityCountingOn = true;
 
-
+var lastActivityType = null;
 
 chrome.runtime.onConnect.addListener(function(port) {
 	console.assert(port.name == "activity");
 	port.onMessage.addListener(function(msg) {
 		if(window.activityCountingOn){
-			console.log(msg);
-			if (msg.action === 'click'){
-				window.activityLog.clicks += 1;
-				console.log(window.activityLog);
-			};
+			//console.log(msg);
+			var action = msg.action;
+			if (lastActivityType != action || action === 'click'){
+				//Every click counts, but multiple keydowns or scrolls in a row
+				//counts as a single action
+				window.activityLog[action] += 1;
+			}
+			
+			lastActivityType = action;
+			console.log(window.activityLog);
+			
 
 		};
 	});
@@ -21,9 +27,9 @@ chrome.runtime.onConnect.addListener(function(port) {
 var resetActivityCount = function(){
 	console.log('resetting activity count');
 	window.activityLog = {
-		clicks: 0,
-		scrolls: 0,
-		types: 0
+		click: 0,
+		scroll: 0,
+		keydown: 0
 	};
 };
 

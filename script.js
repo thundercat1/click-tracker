@@ -2,6 +2,7 @@ chrome.tabs.executeScript(null, {file: "contentScript.js"});
 
 var clicksDisplay = document.getElementById('clicks');
 var scrollsDisplay = document.getElementById('scrolls');
+var typesDisplay = document.getElementById('types');
 var statusDisplay = document.getElementById('status');
 
 var bg = chrome.extension.getBackgroundPage();
@@ -21,7 +22,13 @@ chrome.runtime.onConnect.addListener(function(port) {
 var updateActivityView = function(){
   console.log('updating using background activity log');
   console.log(bg.activityLog);
-  clicksDisplay.innerHTML = bg.activityLog.clicks;
+  //console.log(bg.activityLog.click);
+  console.log(bg.activityLog.scroll);
+  console.log(scrollsDisplay);
+  clicksDisplay.innerHTML = bg.activityLog.click;
+  scrollsDisplay.innerHTML = bg.activityLog.scroll;
+  typesDisplay.innerHTML = bg.activityLog.keydown;
+  console.log(scrollsDisplay);
 }
 
 var resetActivityCount = function(){

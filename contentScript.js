@@ -6,9 +6,17 @@ console.log('contentScript run');
 if(!window.activityLoggerSetUp){
 	var port = chrome.runtime.connect({name: "activity"});
 	document.addEventListener('click', function(e){
-		//activity.clicks += 1;
 		port.postMessage({action: 'click'});
 		});
+
+	document.addEventListener('scroll', function(e){
+		port.postMessage({action: 'scroll'});
+		});
+
+	document.addEventListener('keydown', function(e){
+		port.postMessage({action: 'keydown'});
+		});
+
 	window.activityLoggerSetUp = true;
 	console.log('Activity Logger Added');
 }
