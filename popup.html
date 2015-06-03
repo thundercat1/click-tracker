@@ -1,0 +1,29 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Getting Started Extension's Popup</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <p>Hello!</p>
+    <h3>Clicks</h3>
+    <div id="clicks"></div>
+    <h3>Scrolls</h3>
+    <div id="scrolls"></div>
+    <h3>Types</h3>
+    <div id="types"></div>
+
+    <h3>clicks from background</h3>
+    <div id="clicksFromBackground"></div>
+    <button class="btn btn-success" id="updateActivityBtn">Update</button>
+
+  </body>
+  <script src="script.js"></script>
+</html>
