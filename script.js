@@ -2,15 +2,10 @@ chrome.tabs.executeScript(null, {file: "contentScript.js"});
 
 var clicksDisplay = document.getElementById('clicks');
 var scrollsDisplay = document.getElementById('scrolls');
-var bgClicksDisplay = document.getElementById('clicksFromBackground');
-console.log(clicksDisplay);
+var statusDisplay = document.getElementById('status');
 
 var bg = chrome.extension.getBackgroundPage();
 bg.hello = 'hello';
-console.log('Background Page:');
-console.log(bg);
-console.log(bg.hello);
-console.log(bg.item);
 
 /*
 chrome.runtime.onConnect.addListener(function(port) {
@@ -26,23 +21,31 @@ chrome.runtime.onConnect.addListener(function(port) {
 var updateActivityView = function(){
   console.log('updating using background activity log');
   console.log(bg.activityLog);
-  bgClicksDisplay.innerHTML = bg.activityLog.clicks;
+  clicksDisplay.innerHTML = bg.activityLog.clicks;
 }
 
-var updateBtn = document.getElementById('updateActivityBtn');
-console.log(updateBtn);
-console.log(updateActivityView);
-updateBtn.addEventListener('click', updateActivityView);
+var resetActivityCount = function(){
+  bg.resetActivityCount();
+  updateActivityView();
+}
 
+var updateStatusDisplay = function(){
+  statusDisplay.innerHTML = "Running: " + bg.activityCountingOn;
+}
+
+var startBtn = document.getElementById('startBtn');
+startBtn.addEventListener('click', function(){
+  bg.activityCountingOn = true;
+  updateStatusDisplay();
+});
+
+var stopBtn = document.getElementById('stopBtn');
+stopBtn.addEventListener('click', function(){
+  bg.activityCountingOn = false;
+  updateStatusDisplay();
+});
+
+var resetBtn = document.getElementById('resetBtn');
+resetBtn.addEventListener('click', resetActivityCount);
 updateActivityView();
-
-/*
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    console.log(request.clicks)
-      sendResponse(
-      	{ 
-      		msg: "Message successfully processed"
-      	});
-  });
-*/
+updateStatusDisplay();

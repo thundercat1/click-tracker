@@ -9,21 +9,48 @@
     <title>Getting Started Extension's Popup</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <p>Hello!</p>
-    <h3>Clicks</h3>
-    <div id="clicks"></div>
-    <h3>Scrolls</h3>
-    <div id="scrolls"></div>
-    <h3>Types</h3>
-    <div id="types"></div>
+    <div class="container">
+    <div class="intro">
+      <h4>Action Counter</h4>
+    </div>
 
-    <h3>clicks from background</h3>
-    <div id="clicksFromBackground"></div>
-    <button class="btn btn-success" id="updateActivityBtn">Update</button>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Clicks</th>
+          <th>Scrolls</th>
+          <th>Types</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div id="clicks"></div>
+          </td>
 
+          <td>
+            <div id="scrolls"></div>
+          </td>
+
+          <td>
+            <div id="types"></div>
+          </td>
+      </tbody>
+    </table>
+    <div id="status"></div>
+    
+    <div class="row btn-row">
+      <button class="btn btn-xs col-xs-3 btn-success" id="startBtn">Start</button>
+      <button class="btn btn-xs col-xs-3 col-xs-offset-1 btn-warning" id="stopBtn">
+        Stop</button>
+      <button class="btn btn-danger btn-xs col-xs-3 col-xs-offset-1" id="resetBtn">
+        Reset
+      </button>
+    </div>
+  </div>
   </body>
   <script src="script.js"></script>
 </html>

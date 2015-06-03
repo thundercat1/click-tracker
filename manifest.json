@@ -1,6 +1,6 @@
 {
-  "name": "Page Redder",
-  "description": "Make the current page red",
+  "name": "Click Counter",
+  "description": "Count clicks and other activities across tabs.",
   "version": "2.0",
   "permissions": [
     "activeTab",
@@ -24,7 +24,7 @@
   ],
 
     "browser_action": {
-      "default_title": "Make this page red",
+      "default_title": "View Activity Count",
       "default_popup": "popup.html"
     },
 
